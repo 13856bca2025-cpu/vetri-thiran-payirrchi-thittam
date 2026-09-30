@@ -1,0 +1,249 @@
+{% extends "base.html" %}
+
+{% block title %}
+FitBuddy — Create your plan
+{% endblock %}
+
+
+{% block content %}
+
+<section class="hero">
+
+    <div>
+
+        <p class="eyebrow">
+            AI FITNESS PLANNER
+        </p>
+
+        <h1>
+            Your week.<br>
+            <span>Built around you.</span>
+        </h1>
+
+        <p class="hero-copy">
+
+            Create a personalized 7-day
+            workout plan and a practical
+            nutrition or recovery tip.
+
+            Refine it later with your own
+            feedback.
+
+        </p>
+
+    </div>
+
+
+    <div class="card form-card">
+
+        <h2>
+            Tell us about you
+        </h2>
+
+
+        <form
+            method="post"
+            action="/generate-workout"
+            class="grid-form"
+        >
+
+            <label>
+
+                Name
+
+                <input
+                    name="username"
+                    required
+                    minlength="2"
+                    maxlength="120"
+                    placeholder="Alex"
+                >
+
+            </label>
+
+
+            <label>
+
+                User ID
+
+                <input
+                    name="user_id"
+                    required
+                    pattern="[A-Za-z0-9_-]+"
+                    maxlength="80"
+                    placeholder="alex01"
+                >
+
+            </label>
+
+
+            <label>
+
+                Age
+
+                <input
+                    type="number"
+                    name="age"
+                    required
+                    min="13"
+                    max="100"
+                    placeholder="25"
+                >
+
+            </label>
+
+
+            <label>
+
+                Weight (kg)
+
+                <input
+                    type="number"
+                    name="weight"
+                    required
+                    min="25.1"
+                    max="500"
+                    step="0.1"
+                    placeholder="70"
+                >
+
+            </label>
+
+
+            <label>
+
+                Fitness goal
+
+                <select
+                    name="goal"
+                    required
+                >
+
+                    <option value="weight loss">
+                        Weight loss
+                    </option>
+
+                    <option value="muscle gain">
+                        Muscle gain
+                    </option>
+
+                    <option value="general wellness">
+                        General wellness
+                    </option>
+
+                    <option value="flexibility">
+                        Flexibility
+                    </option>
+
+                    <option value="endurance">
+                        Endurance
+                    </option>
+
+                </select>
+
+            </label>
+
+
+            <label>
+
+                Intensity
+
+                <select
+                    name="intensity"
+                    required
+                >
+
+                    <option value="low">
+                        Low
+                    </option>
+
+                    <option
+                        value="medium"
+                        selected
+                    >
+                        Medium
+                    </option>
+
+                    <option value="high">
+                        High
+                    </option>
+
+                </select>
+
+            </label>
+
+
+            <button
+                class="btn primary full"
+                type="submit"
+            >
+                Generate my 7-day plan →
+            </button>
+
+        </form>
+
+
+        <p class="small-note">
+
+            Tip: specific feedback later
+            produces a more useful revision.
+
+        </p>
+
+    </div>
+
+</section>
+
+
+<section class="feature-row">
+
+    <div>
+
+        <strong>01</strong>
+
+        <h3>
+            Personalized
+        </h3>
+
+        <p>
+            Goal and intensity-aware
+            weekly structure.
+        </p>
+
+    </div>
+
+
+    <div>
+
+        <strong>02</strong>
+
+        <h3>
+            Adaptive
+        </h3>
+
+        <p>
+            Ask for more cardio,
+            rest, mobility, or other changes.
+        </p>
+
+    </div>
+
+
+    <div>
+
+        <strong>03</strong>
+
+        <h3>
+            Persistent
+        </h3>
+
+        <p>
+            Your plan history is stored
+            locally in SQLite.
+        </p>
+
+    </div>
+
+</section>
+
+{% endblock %}

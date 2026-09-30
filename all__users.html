@@ -1,0 +1,162 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+FitBuddy — Admin
+{% endblock %}
+
+
+{% block content %}
+
+<section class="page-heading">
+
+    <div>
+
+        <p class="eyebrow">
+            ADMIN DASHBOARD
+        </p>
+
+        <h1>
+            Users & plans
+        </h1>
+
+    </div>
+
+</section>
+
+
+{% if not users %}
+
+<div class="card empty">
+
+    <h2>
+        No users yet
+    </h2>
+
+    <p>
+        Create a plan from the home page first.
+    </p>
+
+</div>
+
+{% endif %}
+
+
+<div class="admin-list">
+
+{% for user in users %}
+
+    <article class="card admin-card">
+
+        <div class="admin-header">
+
+            <div>
+
+                <h2>
+                    {{ user.name }}
+                </h2>
+
+                <p>
+                    {{ user.external_user_id }}
+                    ·
+                    {{ user.age }} years
+                    ·
+                    {{ user.weight_kg }} kg
+                </p>
+
+            </div>
+
+
+            <div class="tags">
+
+                <span>
+                    {{ user.goal|title }}
+                </span>
+
+                <span>
+                    {{ user.intensity|title }}
+                </span>
+
+            </div>
+
+        </div>
+
+
+        {% for plan in user.plans %}
+
+        <div class="admin-plan">
+
+            <div>
+
+                <h3>
+                    Plan #{{ plan.id }}
+                </h3>
+
+                <p class="small-note">
+
+                    Created
+
+                    {{
+                        plan.created_at.strftime(
+                            '%Y-%m-%d %H:%M'
+                        )
+                        if plan.created_at
+                        else ''
+                    }}
+
+                </p>
+
+            </div>
+
+
+            <details>
+
+                <summary>
+                    Original plan
+                </summary>
+
+                <pre class="plan-text compact">{{ plan.original_plan }}</pre>
+
+            </details>
+
+
+            {% if plan.updated_plan %}
+
+            <details open>
+
+                <summary>
+                    Latest updated plan
+                </summary>
+
+                <pre class="plan-text compact">{{ plan.updated_plan }}</pre>
+
+            </details>
+
+            {% endif %}
+
+
+            {% if plan.latest_feedback %}
+
+            <div class="feedback-quote">
+
+                <strong>
+                    Latest feedback:
+                </strong>
+
+                {{ plan.latest_feedback }}
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+        {% endfor %}
+
+    </article>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}
